@@ -8,17 +8,22 @@
          display: block;
          color: #235789;
          font-size: 16px;
+         text-align: center; /* Centering label text */
       }
 
       body {
          max-width:600px;
+         margin: 0 auto; /* Centering body content */
          font-family: 'Arial', sans-serif;
          background-color: #DAE3E5;
       }
 
+      h1, p, form, footer, h3 { /* Centering all these elements */
+        text-align: center;
+      }
+
       h1 {
         color: #521751;
-        text-align: center;
         padding-top: 20px;
         font-size: 35px;
         letter-spacing: 1px;
@@ -36,6 +41,7 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        margin: 10px auto; /* Centering buttons */
       }
 
       button:hover {
@@ -44,7 +50,6 @@
       }
 
       footer {
-        text-align: center;
         padding: 15px 0;
         color: #521751;
       }
@@ -56,14 +61,14 @@
 
       <h1>Passover Seder</h1>
       <p>Start Time: Mar 24th 2003, 1:25 AM</p>
-      <p><a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Passover+Seder&dates=20240422T180000Z/20240422T200000Z&details=Come+spend+this+earth+day+seder+with+your+favorite+sf+semites&location=867+S+Van+Ness+Ave" target="_blank">
+      <p><a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Passover+Seder&dates=20240423T010000Z/20240423T030000Z&details=Come+spend+this+earth+day+seder+with+your+favorite+sf+semites&location=867+S+Van+Ness+Ave" target="_blank">
 Add to Calendar
 </a>
 </p>
       <p>Location: 867 S Van Ness Ave</p>
       <p>Description: Come spend this earth day seder with your favorite sf semites</p>
 
-      <img src="https://replicate.delivery/pbxt/rev42TPj7mR6VSfdPAUZK4f1zuGJFjUeedL9v9fT8PiQe4YVJA/out-0.png" alt="" height="200">
+      <img src="https://replicate.delivery/pbxt/rev42TPj7mR6VSfdPAUZK4f1zuGJFjUeedL9v9fT8PiQe4YVJA/out-0.png" alt="" height="200" style="display: block; margin: 0 auto;"> <!-- Centering image -->
 
       <h3 style="color:#992420;">RSVP</h3>
 
@@ -89,7 +94,7 @@ Add to Calendar
          </button>
 
          <h3 style="color:#992420;">Guest list</h3>
-         <div id="guest_list">No attendees yet.</div>
+         <div id="guest_list" style="text-align: center;">No attendees yet.</div> <!-- Centering guest list text -->
       </form>
 
       <footer><i>This party page was created with <a href="https://shindig.lol?utm_source=footer">shindig.lol</a></i>
@@ -104,11 +109,14 @@ Add to Calendar
         const guestList = document.querySelector("#guest_list");
         guestList.innerHTML = "";
         const ul = document.createElement("ul");
+        ul.style.listStyleType = "none"; /* Removing list style */
+        ul.style.padding = "0"; /* Removing padding to center list items */
         guestList.appendChild(ul);
 
         json.data.forEach((guest) => {
             const guestElement = document.createElement("li");
             guestElement.innerHTML = `${guest.name} (${guest.status})`;
+            guestElement.style.textAlign = "center"; /* Centering guest list items */
             ul.appendChild(guestElement);
         });
         });
