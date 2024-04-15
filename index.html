@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <title>Passover Seder</title>
+       <style>
+      label {
+         display: block;
+         color: #235789;
+         font-size: 16px;
+      }
+
+      body {
+         max-width:600px;
+         font-family: 'Arial', sans-serif;
+         background-color: #DAE3E5;
+      }
+
+      h1 {
+        color: #521751;
+        text-align: center;
+        padding-top: 20px;
+        font-size: 35px;
+        letter-spacing: 1px;
+      }
+
+      p {
+        color: #992420;
+        font-size: 22px;
+      }
+
+      button {
+        background-color: #235789;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #DAE3E5;
+        color: #235789;
+      }
+
+      footer {
+        text-align: center;
+        padding: 15px 0;
+        color: #521751;
+      }
+   </style>
+
+   </head>
+   
+   <body>
+
+      <h1>Passover Seder</h1>
+      <p>Start Time: Mar 24th 2003, 1:25 AM</p>
+      <p><a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Passover+Seder&dates=20240422T180000Z/20240422T200000Z&details=Come+spend+this+earth+day+seder+with+your+favorite+sf+semites&location=867+S+Van+Ness+Ave" target="_blank">
+Add to Calendar
+</a>
+</p>
+      <p>Location: 867 S Van Ness Ave</p>
+      <p>Description: Come spend this earth day seder with your favorite sf semites</p>
+
+      <img src="https://replicate.delivery/pbxt/rev42TPj7mR6VSfdPAUZK4f1zuGJFjUeedL9v9fT8PiQe4YVJA/out-0.png" alt="" height="200">
+
+      <h3 style="color:#992420;">RSVP</h3>
+
+      <form id="rsvp_form">
+         <label>Name
+         <input name="name" type="text" />
+         </label>
+         <label>Phone number
+         <input type="tel" name="phone_number" placeholder="(555) 555-5555" />
+         </label>
+         <input type="hidden" id="status" name="status" value="" />
+
+         <button type="submit" id="yes">
+         I&rsquo;m in!
+         </button>
+
+         <button type="submit" id="maybe">
+         We&rsquo;ll see
+         </button>
+
+         <button type="submit" id="no">
+         Wish I could
+         </button>
+
+         <h3 style="color:#992420;">Guest list</h3>
+         <div id="guest_list">No attendees yet.</div>
+      </form>
+
+      <footer><i>This party page was created with <a href="https://shindig.lol?utm_source=footer">shindig.lol</a></i>
+      </footer>
+   <script>
+    const partySlug = "tedious-kill-soiree";
+
+    const populateGuestList = function () {
+    fetch(`https://shindig.lol/api/v0/parties/${partySlug}/guests`)
+        .then((response) => response.json())
+        .then((json) => {
+        const guestList = document.querySelector("#guest_list");
+        guestList.innerHTML = "";
+        const ul = document.createElement("ul");
+        guestList.appendChild(ul);
+
+        json.data.forEach((guest) => {
+            const guestElement = document.createElement("li");
+            guestElement.innerHTML = `${guest.name} (${guest.status})`;
+            ul.appendChild(guestElement);
+        });
+        });
+    };
+
+    const rsvp = function (event) {
+    event.preventDefault();
+
+    const rsvp_form = document.querySelector("#rsvp_form");
+    const name = document.querySelector("input[name=name]");
+    const phone = document.querySelector("input[name=phone_number]");
+    const status = document.querySelector("input[name=status]");
+
+    const rsvpData = {
+        guest: {
+        name: name.value,
+        phone_number: `+1 ${phone.value}`, // Shindig requires a country code
+        status: status.value,
+        },
+    };
+
+    fetch(`https://shindig.lol/api/v0/parties/${partySlug}/guests`, {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify(rsvpData),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+        if ("errors" in data) {
+            const errorMessage = Object.entries(data.errors)
+            .map(([key, value]) => `${key} ${value}`)
+            .join(", ");
+            alert(`Error: ${errorMessage}`);
+        } else {
+            alert("Your response has been recorded.");
+            populateGuestList();
+            rsvp_form.reset();
+        }
+        });
+    };
+
+    window.addEventListener("DOMContentLoaded", (event) => {
+    populateGuestList();
+
+    const rsvp_form = document.querySelector("#rsvp_form");
+    rsvp_form.addEventListener("submit", rsvp);
+
+    const status = document.querySelector("#status");
+
+    const yes = document.querySelector("#yes");
+    const maybe = document.querySelector("#maybe");
+    const no = document.querySelector("#no");
+    yes.addEventListener("click", (event) => { status.value = "yes"; });
+    maybe.addEventListener("click", (event) => { status.value = "maybe"; });
+    no.addEventListener("click", (event) => { status.value = "no"; });
+});
+</script>
+</body>
+</html>
