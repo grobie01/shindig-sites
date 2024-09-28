@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <title>Chill Chamber Music</title>
+      <meta property="og:image" content="violin.png" />
+      <meta name="twitter:image" content="violin.png" />
+      <link rel="icon" href="note.ico" type="image/x-icon" />
+      <style>
+         body {
+            max-width: 600px;
+            background-color: #fcc6e6;
+            color: #b5ff6f;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 auto; /* Centering the body */
+         }
+
+         .main-panel {
+            background-color: #d147a3; /* Dark pink background */
+            padding: 20px;
+            border-radius: 10px;
+         }
+
+         h1 {
+            font-size: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 20px;
+            color: #fff2b1;
+         }
+
+         p {
+            font-size: 18px;
+            padding: 10px;
+         }
+         
+         img {
+             border-radius: 5%;
+             margin: 5px;
+             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Adding drop shadow */
+             border: 2px solid black; /* Adding black border */
+         }
+
+         .image-row {
+             display: flex;
+             justify-content: center;
+         }
+
+         label {
+            display: block;
+            color: #63a35c;
+            font-size: 16px;
+            padding: 10px;
+         }
+
+         button {
+            font-size: 16px;
+            background-color: #63a35c;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+         }
+
+         button:hover {
+            background-color: #94b36a;
+         }
+
+         .guest-list-panel {
+            background-color: #ffa500; /* Orange background */
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 20px;
+         }
+
+         ul {
+            list-style-type: none; /* Removing bullets */
+            padding: 0;
+         }
+
+         footer {
+            font-size: 14px;
+            padding: 20px;
+            color: #fff2b1;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="main-panel">
+         <h1>Chill Chamber Music</h1>
+         <p>Event Time: 03/24/2023 at 01:25 AM</p>
+         <p><a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Chill+Chamber+Music&dates=20241001T190000Z/20241001T210000Z&details=brat+summer+may+have+concluded+but+charli+seXCXtet+is+forever.+Come+mingle%2C+munch%2C+and+maybe+even+listen.+Serving+cookies%2C+crudit%C3%A9s%2C+and+tea+so+come+just+a+tiny+bit+hungry.%0A%0AWe%27re+excited+to+share+our+music+with+you%21+Featuring%3A+Karen+Ouyang%2C+Brad+Girardeau+on+violins%2C+Amy+Wang%2C+Zhimin+Zhao+on+violas%2C+and+Julia+Hu%2C+Leo+Steinmetz+on+celli.&location=3847+18th+St" target="_blank">
+         Add to Calendar
+         </a></p>
+         <p>3847 18th St</p>
+         <p>Even though the summer has come to an end, Charli seXCXtet is forever.</p>
+         <p>Join us for a fun-filled night of mingling, munching, and music.</p>
+         <p>Tantalize your taste buds with cookies, crudités, and tea.</p>
+         <p>Bring a bit of your appetite and enjoy the melodious tones of Karen Ouyang and Brad Girardeau on violins, Amy Wang, and Zhimin Zhao on violas, with Julia Hu and Leo Steinmetz on their celli.</p>
+         <p>Can't wait to see you there!</p>
+
+         <div class="image-row">
+            <img src="cello.png" alt="" height="200">
+            <img src="cello.png" alt="" height="200">
+            <img src="cello.png" alt="" height="200">
+         </div>
+
+         <h3>RSVP</h3>
+         <form id="rsvp_form">
+            <label>
+            Name <input name="name" type="text" />
+            </label>
+            <label>
+            Phone number
+            <input type="tel" name="phone_number" placeholder="(555) 555-5555" />
+            </label>
+            <input type="hidden" id="status" name="status" value="" />
+            <button type="submit" id="yes">I&rsquo;m in!</button>
+            <button type="submit" id="maybe">We&rsquo;ll see</button>
+            <button type="submit" id="no">Wish I could</button>
+            <div class="guest-list-panel">
+               <h3>Guest list</h3>
+               <div id="guest_list">No attendees yet.</div>
+            </div>
+         </form>
+         <footer><i>This party page was created with <a href="https://shindig.lol?utm_source=footer">shindig.lol</a></i>
+         </footer>
+      </div>
+   <script>
+    const partySlug = "compassionate-particular-fiesta";
+
+    const populateGuestList = function () {
+    fetch(`https://shindig.lol/api/v0/parties/${partySlug}/guests`)
+        .then((response) => response.json())
+        .then((json) => {
+        const guestList = document.querySelector("#guest_list");
+        guestList.innerHTML = "";
+        const ul = document.createElement("ul");
+        guestList.appendChild(ul);
+
+        json.data.forEach((guest) => {
+            const guestElement = document.createElement("li");
+            guestElement.innerHTML = `💚 ${guest.name} (${guest.status}) 💚`;
+            ul.appendChild(guestElement);
+        });
+        });
+    };
+
+    const rsvp = function (event) {
+    event.preventDefault();
+
+    const rsvp_form = document.querySelector("#rsvp_form");
+    const name = document.querySelector("input[name=name]");
+    const phone = document.querySelector("input[name=phone_number]");
+    const status = document.querySelector("input[name=status]");
+
+    const rsvpData = {
+        guest: {
+        name: name.value,
+        phone_number: `+1 ${phone.value}`, // Shindig requires a country code
+        status: status.value,
+        },
+    };
+
+    fetch(`https://shindig.lol/api/v0/parties/${partySlug}/guests`, {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify(rsvpData),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+        if ("errors" in data) {
+            const errorMessage = Object.entries(data.errors)
+            .map(([key, value]) => `${key} ${value}`)
+            .join(", ");
+            alert(`Error: ${errorMessage}`);
+        } else {
+            alert("Your response has been recorded.");
+            populateGuestList();
+            rsvp_form.reset();
+        }
+        });
+    };
+
+    window.addEventListener("DOMContentLoaded", (event) => {
+    populateGuestList();
+
+    const rsvp_form = document.querySelector("#rsvp_form");
+    rsvp_form.addEventListener("submit", rsvp);
+
+    const status = document.querySelector("#status");
+
+    const yes = document.querySelector("#yes");
+    const maybe = document.querySelector("#maybe");
+    const no = document.querySelector("#no");
+    yes.addEventListener("click", (event) => { status.value = "yes"; });
+    maybe.addEventListener("click", (event) => { status.value = "maybe"; });
+    no.addEventListener("click", (event) => { status.value = "no"; });
+});
+</script>
+</body>
+</html>
