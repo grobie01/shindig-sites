@@ -332,16 +332,31 @@
         let yOffset = initialY;
         let scrollStartY;
 
-        // Prevent default drag behavior
+        // Prevent default behaviors
         violin.addEventListener('dragstart', (e) => e.preventDefault());
+        violin.addEventListener('touchstart', (e) => e.preventDefault());
 
         function updatePosition(x, y) {
             violin.style.transform = `translate(${x}px, ${y}px)`;
         }
 
+        function getEventCoordinates(e) {
+            if (e.type.includes('touch')) {
+                return {
+                    clientX: e.touches[0].clientX,
+                    clientY: e.touches[0].clientY
+                };
+            }
+            return {
+                clientX: e.clientX,
+                clientY: e.clientY
+            };
+        }
+
         function dragStart(e) {
-            initialMouseX = e.clientX - xOffset;
-            initialMouseY = e.clientY - yOffset;
+            const coords = getEventCoordinates(e);
+            initialMouseX = coords.clientX - xOffset;
+            initialMouseY = coords.clientY - yOffset;
             scrollStartY = window.scrollY;
 
             if (e.target === violin) {
@@ -353,10 +368,11 @@
         function drag(e) {
             if (isDragging) {
                 e.preventDefault();
+                const coords = getEventCoordinates(e);
                 
                 const scrollDiff = window.scrollY - scrollStartY;
-                currentX = e.clientX - initialMouseX;
-                currentY = (e.clientY - initialMouseY) + scrollDiff;
+                currentX = coords.clientX - initialMouseX;
+                currentY = (coords.clientY - initialMouseY) + scrollDiff;
                 
                 xOffset = currentX;
                 yOffset = currentY;
@@ -372,16 +388,23 @@
                 isDragging = false;
                 violin.style.cursor = 'move';
                 scrollStartY = null;
-                checkViolinsPosition();  // Only check position when drag ends
+                checkViolinsPosition();
             }
         }
 
         updatePosition(xOffset, yOffset);
 
+        // Mouse events
         violin.addEventListener('mousedown', dragStart);
         document.addEventListener('mousemove', drag);
         document.addEventListener('mouseup', dragEnd);
         document.addEventListener('mouseleave', dragEnd);
+
+        // Touch events
+        violin.addEventListener('touchstart', dragStart, { passive: false });
+        document.addEventListener('touchmove', drag, { passive: false });
+        document.addEventListener('touchend', dragEnd);
+        document.addEventListener('touchcancel', dragEnd);
     }
 
     // Check if both violins are on the main image
