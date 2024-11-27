@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <link rel="icon" href="note.ico" type="image/x-icon" />
+      <meta property="og:image" content="https://replicate.delivery/yhqm/8E2LkjvVhlKYIZA82n5ZRZZpmS90QP4mDp6UdsNzKWTS4Q9E/out-0.png" />
+      <title>Holiday Chamber Music</title>
+    <style>
+       @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap');
+
+       body {
+         background-color: #fffdf8; /* Warm cream background */
+         font-family: 'Newsreader', Georgia, serif;
+         color: #2d4a34;
+         max-width: 600px;
+         margin: 40px auto;
+         border: none;
+         padding: 30px;
+         line-height: 1.6;
+       }
+
+       /* Cozy texture overlay */
+       body::before {
+         content: "";
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-image: url("data:image/png;base64,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");
+         opacity: 0.03;
+         pointer-events: none;
+         z-index: -1;
+       }
+
+       h1 {
+        font-family: 'Newsreader', Georgia, serif;
+        text-align: center;
+        color: #2d4a34;
+        font-weight: 600;
+        font-size: 2.5em;
+        margin: 1.5em 0;
+        position: relative;
+        font-style: italic;
+       }
+
+       h1::before {
+         content: "🎄";
+         font-style: normal;
+         position: absolute;
+         top: 50%;
+         left: 20px;
+         transform: translateY(-50%) rotate(-10deg);
+       }
+
+       h1::after {
+         content: "🕎";
+         font-style: normal;
+         position: absolute;
+         top: 50%;
+         right: 20px;
+         transform: translateY(-50%) rotate(10deg);
+       }
+
+       p {
+        font-size: 1.1em;
+        line-height: 1.8;
+        color: #2d4a34;
+        margin-bottom: 1.5em;
+       }
+
+       img {
+         display: block;
+         margin: 2em auto;
+         border: 8px solid white;
+         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+         max-width: 90%;
+         height: auto;
+       }
+
+       #rsvp_form {
+          background-color: #fff;
+          padding: 30px;
+          border: 1px solid #e0e0d5;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+          margin-top: 2em;
+          border-radius: 8px;
+       }
+
+       input[type="text"], input[type="tel"] {
+         width: 100%;
+         padding: 12px;
+         border: 1px solid #d4d6c8;
+         border-radius: 4px;
+         margin: 8px 0 20px;
+         background-color: #fdfbf7;
+         color: #2d4a34;
+         font-family: inherit;
+         font-size: 1em;
+       }
+
+       label {
+         display: block;
+         color: #2d4a34;
+         margin-bottom: 5px;
+         font-style: italic;
+       }
+
+       button {
+         margin: 10px;
+         padding: 12px 24px;
+         border: 2px solid #2d4a34;
+         color: #2d4a34;
+         background-color: transparent;
+         font-size: 1em;
+         transition: all 0.3s ease;
+         cursor: pointer;
+         font-family: inherit;
+         border-radius: 4px;
+       }
+
+       button:hover {
+         background-color: #2d4a34;
+         color: #fff;
+         transform: translateY(-2px);
+       }
+
+       footer {
+         text-align: center;
+         margin-top: 60px;
+         color: #666;
+         font-size: 0.9em;
+         font-style: italic;
+       }
+
+       a {
+         color: #2d4a34;
+         text-decoration: none;
+         border-bottom: 1px solid #2d4a34;
+         transition: all 0.2s ease;
+       }
+
+       a:hover {
+         color: #7a4d3f;
+         border-color: #7a4d3f;
+       }
+
+       #guest_list {
+         margin-top: 30px;
+         font-style: italic;
+       }
+
+       #guest_list ul {
+         list-style: none;
+         padding: 0;
+       }
+
+       #guest_list li {
+         padding: 8px 0;
+         border-bottom: 1px dotted #d4d6c8;
+         color: #666;
+       }
+
+       h3 {
+         color: #2d4a34;
+         text-align: center;
+         margin: 1.5em 0;
+         font-style: italic;
+         font-weight: normal;
+       }
+
+       #draggable-violin {
+         position: absolute;
+         width: 80px;
+         height: auto;
+         cursor: move;
+         user-select: none;
+         z-index: 1000;
+         box-shadow: none;
+         border: none;
+         background: none;
+         margin: 0;
+       }
+
+       #draggable-violin-2 {
+         position: absolute;
+         width: 80px;
+         height: auto;
+         cursor: move;
+         user-select: none;
+         z-index: 1000;
+         box-shadow: none;
+         border: none;
+         background: none;
+         margin: 0;
+       }
+
+       .main-image-container {
+         position: relative;
+         margin: 2em auto;
+         display: inline-block;
+       }
+
+       .hidden {
+         display: none;
+       }
+    </style>
+   </head>
+   <body>
+      <h1>Holiday Chamber Music</h1>
+      <p>December 14, 2024 at 5:30 PM (<a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Holiday+Chamber+Music&dates=20241214T173000-0800/20241214T200000-0800&details=Come+kickoff+your+holiday+celebrations+with+some+chamber+music+exactly+where+it%27s+meant+to+be+heard+--+in+the+chamber.+Featuring+our+friends+Isabella+Fulford+and+JK+Hunt+on+violin%2C+Emma+Spellman+on+viola%2C+and+Stefan+Leape+on+cello.+%0A%0AIf+you+come+on+time+you%27ll+have+the+opportunity+to+beta+test+something+we+are+very%2C+very+excited+about.+Otherwise%2C+downbeat+at+6%3A30%21&location=3847+18th+St" target="_blank">
+        add to calendar
+        </a>)</p>
+      <p>3847 18th St</p>
+      <p>Come kickoff your holiday celebrations with some chamber music exactly where it's meant to be heard -- in the chamber. Featuring our friends Isabella Fulford and JK Hunt on violin, Emma Spellman on viola, and Stefan Leape on cello. </p>
+      <p>If you come on time you'll have the opportunity to beta test something we are very, very excited about. Otherwise, downbeat at 6:30!</p>
+      
+      <div class="main-image-container">
+        <img src="https://replicate.delivery/yhqm/8E2LkjvVhlKYIZA82n5ZRZZpmS90QP4mDp6UdsNzKWTS4Q9E/out-0.png" alt="" height="200">
+        <img src="violin.png" id="draggable-violin" alt="Draggable violin" draggable="false">
+        <img src="violin.png" id="draggable-violin-2" alt="Draggable violin 2" draggable="false">
+      </div>
+
+      <h3>RSVP</h3>
+      <form id="rsvp_form">
+         <label>
+         Name <input name="name" type="text" />
+         </label>
+         <label>
+         Phone number
+         <input type="tel" name="phone_number" placeholder="(555) 555-5555" />
+         </label>
+         <input type="hidden" id="status" name="status" value="" />
+         <button type="submit" id="yes">
+         I'm in!
+         </button>
+         <button type="submit" id="maybe">
+         We'll see
+         </button>
+         <button type="submit" id="no">
+         Wish I could
+         </button>
+
+         <h3 class="hidden" id="guest_list_title">Guest list</h3>
+         <div class="hidden" id="guest_list">No attendees yet.</div>
+      </form>
+      <footer><i>This event page was created with <a href="https://shindig.lol?utm_source=footer">shindig.lol</a></i>
+      </footer>
+      <script>
+        const partySlug = "frequent-pop-gala";
+    
+        const populateGuestList = function () {
+        fetch(`https://shindig.lol/api/v0/parties/${partySlug}/guests`)
+            .then((response) => response.json())
+            .then((json) => {
+            const guestList = document.querySelector("#guest_list");
+            guestList.innerHTML = "";
+            const ul = document.createElement("ul");
+            guestList.appendChild(ul);
+    
+            json.data.forEach((guest) => {
+                const guestElement = document.createElement("li");
+                guestElement.innerHTML = `${guest.name} (${guest.status})`;
+                ul.appendChild(guestElement);
+            });
+            });
+        };
+    
+        const rsvp = function (event) {
+        event.preventDefault();
+    
+        const rsvp_form = document.querySelector("#rsvp_form");
+        const name = document.querySelector("input[name=name]");
+        const phone = document.querySelector("input[name=phone_number]");
+        const status = document.querySelector("input[name=status]");
+    
+        const rsvpData = {
+            guest: {
+            name: name.value,
+            phone_number: `+1 ${phone.value}`, // Shindig requires a country code
+            status: status.value,
+            },
+        };
+    
+        fetch(`https://shindig.lol/api/v0/parties/${partySlug}/guests`, {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(rsvpData),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+            if ("errors" in data) {
+                const errorMessage = Object.entries(data.errors)
+                .map(([key, value]) => `${key} ${value}`)
+                .join(", ");
+                alert(`Error: ${errorMessage}`);
+            } else {
+                alert("Your response has been recorded.");
+                populateGuestList();
+                rsvp_form.reset();
+            }
+            });
+        };
+    
+        window.addEventListener("DOMContentLoaded", (event) => {
+        populateGuestList();
+    
+        const rsvp_form = document.querySelector("#rsvp_form");
+        rsvp_form.addEventListener("submit", rsvp);
+    
+        const status = document.querySelector("#status");
+    
+        const yes = document.querySelector("#yes");
+        const maybe = document.querySelector("#maybe");
+        const no = document.querySelector("#no");
+        yes.addEventListener("click", (event) => { status.value = "yes"; });
+        maybe.addEventListener("click", (event) => { status.value = "maybe"; });
+        no.addEventListener("click", (event) => { status.value = "no"; });
+    });
+
+    // Draggable violin functionality
+    function setupDraggableViolin(id, initialX, initialY) {
+        const violin = document.getElementById(id);
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialMouseX;
+        let initialMouseY;
+        let xOffset = initialX;
+        let yOffset = initialY;
+        let scrollStartY;
+
+        // Prevent default drag behavior
+        violin.addEventListener('dragstart', (e) => e.preventDefault());
+
+        function updatePosition(x, y) {
+            violin.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function dragStart(e) {
+            initialMouseX = e.clientX - xOffset;
+            initialMouseY = e.clientY - yOffset;
+            scrollStartY = window.scrollY;
+
+            if (e.target === violin) {
+                isDragging = true;
+                violin.style.cursor = 'grabbing';
+            }
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+                
+                const scrollDiff = window.scrollY - scrollStartY;
+                currentX = e.clientX - initialMouseX;
+                currentY = (e.clientY - initialMouseY) + scrollDiff;
+                
+                xOffset = currentX;
+                yOffset = currentY;
+
+                updatePosition(currentX, currentY);
+            }
+        }
+
+        function dragEnd(e) {
+            if (isDragging) {
+                initialMouseX = currentX;
+                initialMouseY = currentY;
+                isDragging = false;
+                violin.style.cursor = 'move';
+                scrollStartY = null;
+                checkViolinsPosition();  // Only check position when drag ends
+            }
+        }
+
+        updatePosition(xOffset, yOffset);
+
+        violin.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+        document.addEventListener('mouseleave', dragEnd);
+    }
+
+    // Check if both violins are on the main image
+    function checkViolinsPosition() {
+        const mainImage = document.querySelector('.main-image-container img:first-child');
+        const violin1 = document.getElementById('draggable-violin');
+        const violin2 = document.getElementById('draggable-violin-2');
+        const guestList = document.getElementById('guest_list');
+        const guestListTitle = document.getElementById('guest_list_title');
+        
+        const mainRect = mainImage.getBoundingClientRect();
+        const violin1Rect = violin1.getBoundingClientRect();
+        const violin2Rect = violin2.getBoundingClientRect();
+
+        // Check if both violins are mostly within the main image bounds
+        const violin1OnImage = isElementMostlyInside(violin1Rect, mainRect);
+        const violin2OnImage = isElementMostlyInside(violin2Rect, mainRect);
+
+        if (violin1OnImage && violin2OnImage) {
+            guestList.classList.remove('hidden');
+            guestListTitle.classList.remove('hidden');
+        } else {
+            guestList.classList.add('hidden');
+            guestListTitle.classList.add('hidden');
+        }
+    }
+
+    function isElementMostlyInside(elementRect, containerRect) {
+        const elementCenterX = elementRect.left + elementRect.width / 2;
+        const elementCenterY = elementRect.top + elementRect.height / 2;
+        
+        return (
+            elementCenterX >= containerRect.left &&
+            elementCenterX <= containerRect.right &&
+            elementCenterY >= containerRect.top &&
+            elementCenterY <= containerRect.bottom
+        );
+    }
+
+    // Setup both violins
+    setupDraggableViolin('draggable-violin', 150, 0);
+    setupDraggableViolin('draggable-violin-2', 350, 0);
+    </script>
+    </body>
+</html>
