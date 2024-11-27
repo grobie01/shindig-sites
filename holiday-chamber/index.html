@@ -44,22 +44,27 @@
         font-style: italic;
        }
 
-       h1::before {
-         content: "🎄";
-         font-style: normal;
+       .holiday-emoji {
          position: absolute;
          top: 50%;
+         transform: translateY(-50%);
+         cursor: pointer;
+         font-style: normal;
+         user-select: none;
+       }
+
+       .holiday-emoji.left {
          left: 20px;
          transform: translateY(-50%) rotate(-10deg);
        }
 
-       h1::after {
-         content: "🕎";
-         font-style: normal;
-         position: absolute;
-         top: 50%;
+       .holiday-emoji.right {
          right: 20px;
          transform: translateY(-50%) rotate(10deg);
+       }
+
+       h1::before, h1::after {
+         content: none;
        }
 
        p {
@@ -204,10 +209,37 @@
        .hidden {
          display: none;
        }
+
+       @keyframes dance {
+         0%, 100% { transform: translateY(-50%) rotate(-10deg) translateX(0); }
+         25% { transform: translateY(-50%) rotate(-5deg) translateX(-5px); }
+         75% { transform: translateY(-50%) rotate(-15deg) translateX(5px); }
+       }
+
+       @keyframes danceRight {
+         0%, 100% { transform: translateY(-50%) rotate(10deg) translateX(0); }
+         25% { transform: translateY(-50%) rotate(15deg) translateX(5px); }
+         75% { transform: translateY(-50%) rotate(5deg) translateX(-5px); }
+       }
+
+       .holiday-emoji.dancing {
+         animation: dance 1s ease-in-out infinite;
+       }
+
+       .holiday-emoji.dancing.right {
+         animation: danceRight 1s ease-in-out infinite;
+       }
     </style>
    </head>
    <body>
-      <h1>Holiday Chamber Music</h1>
+      <audio id="jingle-sound" src="jingle.mp3"></audio>
+      <audio id="dreidel-sound" src="dreidel.mp3"></audio>
+
+      <h1>
+        <span class="holiday-emoji left" onclick="playHolidaySound('jingle-sound')">🎄</span>
+        Holiday Chamber Music
+        <span class="holiday-emoji right" onclick="playHolidaySound('dreidel-sound')">🕎</span>
+      </h1>
       <p>December 14, 2024 at 5:30 PM (<a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Holiday+Chamber+Music&dates=20241214T173000-0800/20241214T200000-0800&details=Come+kickoff+your+holiday+celebrations+with+some+chamber+music+exactly+where+it%27s+meant+to+be+heard+--+in+the+chamber.+Featuring+our+friends+Isabella+Fulford+and+JK+Hunt+on+violin%2C+Emma+Spellman+on+viola%2C+and+Stefan+Leape+on+cello.+%0A%0AIf+you+come+on+time+you%27ll+have+the+opportunity+to+beta+test+something+we+are+very%2C+very+excited+about.+Otherwise%2C+downbeat+at+6%3A30%21&location=3847+18th+St" target="_blank">
         add to calendar
         </a>)</p>
@@ -319,6 +351,39 @@
         maybe.addEventListener("click", (event) => { status.value = "maybe"; });
         no.addEventListener("click", (event) => { status.value = "no"; });
     });
+
+    let currentlyPlaying = null;
+
+    function playHolidaySound(soundId) {
+        const sound = document.getElementById(soundId);
+        const emojis = document.querySelectorAll('.holiday-emoji');
+        
+        // Remove dancing class from all emojis
+        emojis.forEach(emoji => emoji.classList.remove('dancing'));
+        
+        // If this sound is already playing, stop it
+        if (currentlyPlaying === sound) {
+            sound.pause();
+            sound.currentTime = 0;
+            currentlyPlaying = null;
+            return;
+        }
+        
+        // If a different sound is playing, stop it
+        if (currentlyPlaying) {
+            currentlyPlaying.pause();
+            currentlyPlaying.currentTime = 0;
+        }
+        
+        // Play the new sound and animate the corresponding emoji
+        sound.currentTime = 0;
+        sound.play();
+        currentlyPlaying = sound;
+        
+        // Add dancing class to the clicked emoji
+        const clickedEmoji = document.querySelector(`[onclick*="${soundId}"]`);
+        clickedEmoji.classList.add('dancing');
+    }
 
     // Draggable violin functionality
     function setupDraggableViolin(id, initialX, initialY) {
